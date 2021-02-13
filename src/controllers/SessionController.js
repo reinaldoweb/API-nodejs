@@ -20,8 +20,8 @@ class SessionController{
     //Verificando se esse usuario já exite no banco
     let user = await User.findOne({ email });
 
-    if(!email){
-      user = await User.create({ email })
+    if(!user){
+      user = await User.create({ email });//Cria novo usuairo
     }
     return res.json(user);
   }
