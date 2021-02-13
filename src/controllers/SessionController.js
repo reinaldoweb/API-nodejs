@@ -5,7 +5,7 @@
 
 index: listagem de sessões
 store: Criar uma sessão
-show: Lisar uma unica sessão
+show: Listar uma única sessão
 update: Quando queremos alterar alguma sessao
 destroy: Quando queremos deletar uma sessao
 
@@ -17,9 +17,12 @@ class SessionController{
 
   async store(req, res){
     const { email } = req.body;
+    //Verificando se esse usuario já exite no banco
+    let user = await User.findOne({ email });
 
-    let user = await User.create({ email });
-
+    if(!email){
+      user = await User.create({ email })
+    }
     return res.json(user);
   }
 
