@@ -10,4 +10,4 @@ user:{
 }
 });
 
-export default model('Hosue', HouseSchema);
+export default model('House', HouseSchema);

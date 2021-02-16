@@ -16,12 +16,13 @@ import User from '../models/User';
 class SessionController{
 
   async store(req, res){
-    const { email } = req.body;
+    const {email} = req.body;
+
     //Verificando se esse usuario já exite no banco
     let user = await User.findOne({ email });
 
     if(!user){
-      user = await User.create({ email });//Cria novo usuairo
+      user = await User.create({ email });//Cria novo usuario
     }
     return res.json(user);
   }
