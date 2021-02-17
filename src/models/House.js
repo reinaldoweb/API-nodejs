@@ -1,3 +1,5 @@
+//Criando uma casa no banco de dados
+
 import { Schema, model } from 'mongoose';
 const HouseSchema = new Schema({
 thumbmail: String,
