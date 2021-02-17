@@ -7,7 +7,7 @@ class App{
   constructor(){
     this.server = express();
 
-    mongoose.connect('mongodb+srv://devhouse:devhouse@devhouse.hlepx.mongodb.net/devhouse?retryWrites=true&w=majority',{
+    mongoose.connect('mongodb://devhouse:devhouse@devhouse-shard-00-00.hlepx.mongodb.net:27017,devhouse-shard-00-01.hlepx.mongodb.net:27017,devhouse-shard-00-02.hlepx.mongodb.net:27017/devhouse?ssl=true&replicaSet=atlas-z5acv6-shard-0&authSource=admin&retryWrites=true&w=majority',{
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
