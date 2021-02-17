@@ -7,7 +7,7 @@ storage: multer.diskStorage({
     const ext = path.extname(file.originalname);//Armazena a extenção da imagem na variavael ext
     const name = path.basename(file.originalname, ext); // Pega o nome original da imagem
 
-    cb(null, `${name}-${Date.now()}${ext}`);
+    cb(null, `${name}-${Date.now()}${ext}`)
 
   },
 })
