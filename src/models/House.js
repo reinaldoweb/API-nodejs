@@ -2,7 +2,7 @@
 
 import { Schema, model } from 'mongoose';
 const HouseSchema = new Schema({
-thumbmail: String,
+thumbnail: String,
 description: String,
 price: Number,
 location: String,
@@ -15,7 +15,8 @@ user:{
 
 HouseSchema.virtual('thumbnail_url').get(function(){
   return `http://localhost:3333/files/${this.thumbnail}`;
-},{
+},
+{
   toJSON:{
     virtuals: true
   }
