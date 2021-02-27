@@ -12,6 +12,8 @@ const upload = multer(uploadConfig)
 
 routes.post('/sessions', SessionController.store);
 routes.post('/houses', upload.single('thumbnail'), HouseController.store);//Upload single para enviar apenas uma imagem
-
+routes.get('/houses', HouseController.index);//Lista as casas cadastradas
+routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.update);
+routes.delete('/houses', HouseController.destroy);
 
 export default routes;
