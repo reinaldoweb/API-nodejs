@@ -1,10 +1,15 @@
-import House from './models/House';
+import House from '../models/House';
 
 class DashboardController{
 
  async show(req, res){
+ const { user_id } = req.headers;
 
-  return res.json({ok:true});
+ const houses = await House.find({ user: user_id })//Busca todas as casas onde propriedade user = user_id
+
+
+
+  return res.json({houses});
   }
 
 }
