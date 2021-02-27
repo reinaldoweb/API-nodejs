@@ -16,7 +16,6 @@ routes.post('/houses', upload.single('thumbnail'), HouseController.store);//Uplo
 routes.get('/houses', HouseController.index);//Lista as casas cadastradas
 routes.put('/houses/:house_id', upload.single('thumbnail'), HouseController.update);
 routes.delete('/houses', HouseController.destroy);
-
 routes.get('/dashboard', DashboardController.show);
 
 export default routes;
