@@ -1,5 +1,7 @@
 import House from '../models/House';
 import User from '../models/User';
+import * as Yup from 'yup';
+
 class HouseController { //Editando e excluindo
 
   async index(req, res) {
@@ -12,11 +14,26 @@ class HouseController { //Editando e excluindo
 
   async store(req, res) {//Pega dados do formulario
 
+    const schema = Yup.object().shape({ //Faz a verificação dos campos do formulário
+      description: Yup.string().required(),
+      price: Yup.number().required(),
+      location: Yup.string().required(),
+      status: Yup.boolean().required(),
+    });
+  
+    
     const { filename } = req.file;
     const { description, price, location, status } = req.body;
     const { user_id } = req.headers;
-
     
+    
+    //Faz validação do formulário
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Falha na validação. '})
+      
+    }
+
 
     const house = await House.create({ //Cria novo registro no banco de dados
       user: user_id,
@@ -32,10 +49,25 @@ class HouseController { //Editando e excluindo
 
   async update(req, res) {
 
+    const schema = Yup.object().shape({ //Faz a verificação dos campos do formulário
+      description: Yup.string().required(),
+      price: Yup.number().required(),
+      location: Yup.string().required(),
+      status: Yup.boolean().required(),
+    });
+
     const { filename } = req.file;
     const { house_id } = req.params;
     const { description, price, location, status } = req.body;
     const { user_id } = req.headers;
+
+
+    //Faz validação do formulário
+
+    if (!(await schema.isValid(req.body))) {
+      return res.status(400).json({ error: 'Falha na validação. '})
+      
+    }
 
     const user = await User.findById(user_id);
     const houses = await House.findById(house_id);
@@ -57,8 +89,8 @@ class HouseController { //Editando e excluindo
     return res.send();
   }
 
-  async destroy(req, res){
-   
+  async destroy(req, res) {
+
     const { house_id } = req.bady;
     const { user_id } = req.headers;
 
@@ -69,8 +101,8 @@ class HouseController { //Editando e excluindo
       return res.status(401).json({ error: 'Não autorizado.' });
     }
 
-    await House.findByIdAndDelete({_id: house_id});
-    return res.json({message: "Excluida com sucesso!"});
+    await House.findByIdAndDelete({ _id: house_id });
+    return res.json({ message: "Excluida com sucesso!" });
   }
 
 }
