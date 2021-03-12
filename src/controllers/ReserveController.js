@@ -42,6 +42,16 @@ class ReserveController {
 
     return res.json(reserve);
   }
+
+  async destroy(req, res){
+    const { reserve_id } = req.body;
+
+    await Reserve.findByIdAndDelete({ _id: reserve_id });
+    return res.send();
+
+    return res.json({ ok: true });
+  }
 }
+
 
 export default new ReserveController();
